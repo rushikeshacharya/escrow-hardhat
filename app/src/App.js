@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+import { EscrowContext } from './context/escrowContext';
+import CreateNewContract from './components/NewContract';
+import ExistingContracts from './components/DeployedContracts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const { provider, account } = useContext(EscrowContext);
+    return provider ? (
+        <main>
+            <h1 className='text-center'>Decentralized Escrow Application</h1>
+            <p className='text-end margin-right'>
+                <strong>User Address:</strong> {account}
+            </p>
+            <div className='display-flex'>
+                <CreateNewContract />
+                <ExistingContracts />
+            </div>
+        </main>
+    ) : (
+        <div className='fixed-container'>
+            <p>You need to install a browser wallet to use the DApp</p>
+        </div>
+    );
 }
-
-export default App;
