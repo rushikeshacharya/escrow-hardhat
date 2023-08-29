@@ -117,9 +117,10 @@ export default function CreateNewContract() {
         className="button"
         id="deploy"
         type="submit"
+        name="Create"
         disabled={!isValid() || isDeploying}
       >
-        {isDeploying ? "Processing..." : "Deploy"}
+        {isDeploying ? "Creating..." : "Create"}
       </button>
     </form>
   );
