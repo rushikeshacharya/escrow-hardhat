@@ -1,20 +1,18 @@
 import { useContext } from 'react';
-import { EscrowContext } from './context/escrowContext';
-import CreateNewContract from './components/NewContract';
-import ExistingContracts from './components/DeployedContracts';
+import { EscrowContext } from './store/escrow-context';
+import NewContractForm from './components/NewContractForm';
+import ExistingContracts from './components/ExistingContracts';
 
 export default function App() {
     const { provider, account } = useContext(EscrowContext);
     return provider ? (
         <main>
-            <h1 className='text-center'>Decentralized Escrow Application</h1>
-            <p className='text-end margin-right'>
-                <strong>User Address:</strong> {account}
+            <h1 className='main-title'>ESCROW CONTRACT FACTORY</h1>
+            <p>
+                <strong>Signer:</strong> {account}
             </p>
-            <div className='display-flex'>
-                <CreateNewContract />
-                <ExistingContracts />
-            </div>
+            <NewContractForm />
+            <ExistingContracts />
         </main>
     ) : (
         <div className='fixed-container'>
