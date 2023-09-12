@@ -15,12 +15,16 @@ export default function Escrow({ address, arbiter, recipient, amount }) {
   const handleApprove = async () => {
     setIsApproving(true);
     try {
+      console.log('Contract addresss:', address);
+      console.log('Contract signer:', signer);
+
       const escrowContract = contractInstance(address, signer);
       const tx = await escrowContract.connect(signer).approve();
-      await tx.wait();
+      let res = await tx.wait();
+      console.log('res', res);
       setApproved(true);
     } catch (err) {
-      console.log('Error in Escrow component: handleApprove');
+      console.log('Error in Escrow component: handleApprove', err);
       alert('handleApprove: -', err.message);
     }
     setIsApproving(false);
@@ -63,7 +67,7 @@ export default function Escrow({ address, arbiter, recipient, amount }) {
         ) : (
           <div id="approved" className="approved">
             <p className="approved-el">
-              <strong>✓ It's been approved!</strong>
+              <strong>Approved Successfully!</strong>
             </p>
           </div>
         )}

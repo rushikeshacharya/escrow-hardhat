@@ -8,13 +8,13 @@ router.get('/getDeployedContracts', function(req, res, next) {
 });
 router.get('/escrow/:signer', (req,res) => {
   const {signer} = req.params;
-  let existingContracts = deplyedContracts.filter(escrow => escrow.arbiter.toLowerCase() === signer.toLowerCase() || escrow.recipient.toLowerCase() === signer.toLowerCase())
+  let existingContracts = deplyedContracts.filter(escrow => escrow.depositor.toLowerCase() === signer.toLowerCase() || escrow.arbiter.toLowerCase() === signer.toLowerCase() || escrow.recipient.toLowerCase() === signer.toLowerCase())
   res.send(existingContracts);
 })
 
-router.post('/createNewEscrow', (req,res) => {
-  const { address, arbiter, recipient, amount} = req.body;
-  deplyedContracts.push({address, arbiter, recipient, amount});
+router.post('/createNewContract', (req,res) => {
+  const { depositor, address, arbiter, recipient, amount} = req.body;
+  deplyedContracts.push({depositor, address, arbiter, recipient, amount});
   res.send({ address, arbiter, recipient, amount});
 })
 
